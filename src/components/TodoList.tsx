@@ -3,10 +3,7 @@ import CreateTodo from "./CreateTodo";
 import Todo, { ITodo } from "./Todo";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState<ITodo[]>([
-    { idx: 1, title: "todo-1", project: "project-1" },
-    { idx: 2, title: "todo-2", project: "project-2" },
-  ]);
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
   const addTodo = (todo: ITodo) => {
     setTodos([...todos, todo]);
@@ -41,7 +38,7 @@ const TodoList = () => {
   return (
     <div className="todo-list-container">
       {Items()}
-      <CreateTodo />
+      <CreateTodo addTodo={addTodo} />
     </div>
   );
 };

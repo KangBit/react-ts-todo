@@ -1,8 +1,8 @@
-export type ITodo = {
+export interface ITodo {
   idx: number;
   title: string;
   project: string;
-};
+}
 
 const Todo = (props: ITodo) => {
   return (

@@ -36,3 +36,83 @@
     transform: rotate(360deg);
   }
 }
+
+.todo-list-container {
+}
+
+/* Todo */
+.todo-item {
+  width: 20rem;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 10px auto;
+  padding: 10px 0;
+}
+
+.todo-title {
+  width: 80%;
+  margin: auto;
+  text-align: left;
+  font-weight: bold;
+}
+
+.todo-project {
+  width: 80%;
+  margin: auto;
+  text-align: left;
+  color: gray;
+  font-weight: bold;
+}
+
+/* CreateTodo */
+.create-todo-container {
+  width: 20rem;
+  margin: auto;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.lbl-title {
+  width: 80%;
+  display: block;
+  margin: auto;
+  font-weight: bold;
+}
+
+.input-title {
+  width: 80%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.lbl-project {
+  width: 80%;
+  display: block;
+  margin: auto;
+  font-weight: bold;
+}
+
+.input-project {
+  width: 80%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.btn-create {
+  width: 40%;
+  font-weight: bold;
+  height: 3rem;
+  color: dodgerblue;
+  border: 1px solid dodgerblue;
+  border-radius: 2px;
+}
+
+.btn-cancel {
+  width: 40%;
+  font-weight: bold;
+  height: 3rem;
+  color: tomato;
+  border: 1px solid tomato;
+  border-radius: 2px;
+}

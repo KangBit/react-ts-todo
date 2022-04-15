@@ -1,10 +1,10 @@
-export type TodoProps = {
+export type ITodo = {
   idx: number;
   title: string;
   project: string;
 };
 
-const Todo = (props: TodoProps) => {
+const Todo = (props: ITodo) => {
   return (
     <div className="todo-item">
       <div>

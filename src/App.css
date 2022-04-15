@@ -51,14 +51,14 @@
 
 .todo-title {
   width: 80%;
-  margin: auto;
+  margin: 0 auto 10px auto;
   text-align: left;
   font-weight: bold;
 }
 
 .todo-project {
   width: 80%;
-  margin: auto;
+  margin: 0 auto 10px auto;
   text-align: left;
   color: gray;
   font-weight: bold;
@@ -131,4 +131,15 @@
   color: tomato;
   border: 1px solid tomato;
   border-radius: 2px;
+}
+
+/* EditTodo */
+.input-edit-title {
+  width: 80%;
+  margin: 0 auto 10px auto;
+}
+
+.input-edit-project {
+  width: 80%;
+  margin: 0 auto 10px auto;
 }

@@ -1,11 +1,9 @@
-import { useState } from "react";
-import { ITodo } from "./Todo";
+import { useContext, useState } from "react";
+import { TodoContext } from "./TodoList";
 
-interface CreateTodoProp {
-  addTodo: (todo: ITodo) => void;
-}
+const CreateTodo = () => {
+  const { todos, setTodos } = useContext(TodoContext);
 
-const CreateTodo = (props: CreateTodoProp) => {
   const [title, setTitle] = useState("");
   const [project, setProejct] = useState("");
   const [idx, setIdx] = useState(0);
@@ -19,7 +17,8 @@ const CreateTodo = (props: CreateTodoProp) => {
   };
 
   const handleClickCreateBtn = () => {
-    props.addTodo({ idx: idx, title: title, project: project });
+    let todo = { idx: idx, title: title, project: project };
+    setTodos([...todos, todo]);
     setIdx(idx + 1);
     setEmpty();
   };

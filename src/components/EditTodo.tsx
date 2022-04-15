@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { ITodo } from "./Todo";
+import React, { useContext, useEffect, useState } from "react";
+import { TodoContext, ITodo as EditTodoProp } from "./TodoList";
 
-interface EditTodoProp extends ITodo {
-  updateTodo: (todo: ITodo) => void;
-}
 const EditTodo = (props: EditTodoProp) => {
+  const { todos, setTodos, setEditIdx } = useContext(TodoContext);
+
   const [title, setTitle] = useState<string>("");
   const [project, setProject] = useState<string>("");
 
@@ -14,7 +13,15 @@ const EditTodo = (props: EditTodoProp) => {
   }, []);
 
   const handleClickSubmitBtn = () => {
-    props.updateTodo({ idx: props.idx, title: title, project: project });
+    const newTodo = todos.map((item) => {
+      if (item.idx === props.idx) {
+        return { idx: props.idx, title, project };
+      } else {
+        return item;
+      }
+    });
+    setTodos(newTodo);
+    setEditIdx(null);
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {

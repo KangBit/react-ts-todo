@@ -1,24 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { TodoContext, ITodo } from "./TodoList";
 
-export interface ITodo {
-  idx: number;
-  title: string;
-  project: string;
-}
+const Todo = (props: ITodo) => {
+  const { todos, setTodos, setEditIdx } = useContext(TodoContext);
 
-interface TodoProjs extends ITodo {
-  setEditIdx: (idx: number | null) => void;
-  deleteTodo: (idx: number) => void;
-}
-
-const Todo = (props: TodoProjs) => {
   const handleClickDeleteBtn = () => {
-    props.deleteTodo(props.idx);
+    const newTodo = todos.filter((itme) => {
+      return itme.idx !== props.idx;
+    });
+    setTodos(newTodo);
   };
 
   const handleClickUpdateBtn = () => {
-    props.setEditIdx(props.idx);
+    setEditIdx(props.idx);
   };
 
   return (

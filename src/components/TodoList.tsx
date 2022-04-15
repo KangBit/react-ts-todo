@@ -1,7 +1,22 @@
-import { useEffect, useState } from "react";
+import { createContext, SetStateAction, useEffect, useState } from "react";
 import CreateTodo from "./CreateTodo";
 import EditTodo from "./EditTodo";
-import Todo, { ITodo } from "./Todo";
+import Todo from "./Todo";
+
+export interface ITodo {
+  idx: number;
+  title: string;
+  project: string;
+}
+
+interface ITodoContext {
+  todos: ITodo[];
+  editIdx: number | null;
+  setTodos: React.Dispatch<SetStateAction<ITodo[]>>;
+  setEditIdx: React.Dispatch<SetStateAction<number | null>>;
+}
+
+export const TodoContext = createContext({} as ITodoContext);
 
 const TodoList = () => {
   const [todos, setTodos] = useState<ITodo[]>([
@@ -9,29 +24,6 @@ const TodoList = () => {
     { idx: 101, title: "todo-101", project: "project-101" },
   ]);
   const [editIdx, setEditIdx] = useState<number | null>(null);
-
-  const addTodo = (todo: ITodo) => {
-    setTodos([...todos, todo]);
-  };
-
-  const deleteTodo = (idx: number) => {
-    const newTodo = todos.filter((itme) => {
-      return itme.idx !== idx;
-    });
-    setTodos(newTodo);
-  };
-
-  const updateTodo = (todo: ITodo) => {
-    const newTodo = todos.map((item) => {
-      if (item.idx === todo.idx) {
-        return todo;
-      } else {
-        return item;
-      }
-    });
-    setTodos(newTodo);
-    setEditIdx(null);
-  };
 
   const Items = () => {
     return todos.map((item) => {
@@ -41,18 +33,11 @@ const TodoList = () => {
             idx={item.idx}
             title={item.title}
             project={item.project}
-            updateTodo={updateTodo}
           ></EditTodo>
         );
       } else {
         return (
-          <Todo
-            idx={item.idx}
-            title={item.title}
-            project={item.project}
-            deleteTodo={deleteTodo}
-            setEditIdx={setEditIdx}
-          ></Todo>
+          <Todo idx={item.idx} title={item.title} project={item.project}></Todo>
         );
       }
     });
@@ -60,8 +45,10 @@ const TodoList = () => {
 
   return (
     <div className="todo-list-container">
-      {Items()}
-      <CreateTodo addTodo={addTodo} />
+      <TodoContext.Provider value={{ todos, editIdx, setTodos, setEditIdx }}>
+        {Items()}
+        <CreateTodo />
+      </TodoContext.Provider>
     </div>
   );
 };

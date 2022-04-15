@@ -30,7 +30,13 @@ const TodoList = () => {
   const Items = () => {
     return todos.map((item) => {
       return (
-        <Todo idx={item.idx} title={item.title} project={item.project}></Todo>
+        <Todo
+          idx={item.idx}
+          title={item.title}
+          project={item.project}
+          deleteTodo={deleteTodo}
+          updateTodo={updateTodo}
+        ></Todo>
       );
     });
   };

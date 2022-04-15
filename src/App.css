@@ -64,6 +64,22 @@
   font-weight: bold;
 }
 
+.btns-container {
+  width: 80%;
+  margin: auto;
+  text-align: right;
+}
+
+.btn-delete {
+  background-color: transparent;
+  border: 0;
+}
+
+.btn-update {
+  background-color: transparent;
+  border: 0;
+}
+
 /* CreateTodo */
 .create-todo-container {
   width: 20rem;

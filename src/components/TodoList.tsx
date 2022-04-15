@@ -2,21 +2,7 @@ import { createContext, SetStateAction, useEffect, useState } from "react";
 import CreateTodo from "./CreateTodo";
 import EditTodo from "./EditTodo";
 import Todo from "./Todo";
-
-export interface ITodo {
-  idx: number;
-  title: string;
-  project: string;
-}
-
-interface ITodoContext {
-  todos: ITodo[];
-  editIdx: number | null;
-  setTodos: React.Dispatch<SetStateAction<ITodo[]>>;
-  setEditIdx: React.Dispatch<SetStateAction<number | null>>;
-}
-
-export const TodoContext = createContext({} as ITodoContext);
+import { ITodo, TodoContext } from "../contexts/TodoContext";
 
 const TodoList = () => {
   const [todos, setTodos] = useState<ITodo[]>([

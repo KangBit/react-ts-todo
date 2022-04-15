@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TodoContext, ITodo as EditTodoProp } from "./TodoList";
+import { TodoContext, ITodo as EditTodoProp } from "../contexts/TodoContext";
 
 const EditTodo = (props: EditTodoProp) => {
   const { todos, setTodos, setEditIdx } = useContext(TodoContext);

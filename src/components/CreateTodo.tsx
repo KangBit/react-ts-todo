@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { TodoContext } from "./TodoList";
+import { TodoContext } from "../contexts/TodoContext";
 
 const CreateTodo = () => {
   const { todos, setTodos } = useContext(TodoContext);

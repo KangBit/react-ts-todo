@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
 
 export interface ITodo {
   idx: number;
@@ -13,29 +14,65 @@ interface TodoProjs extends ITodo {
 }
 
 const Todo = (props: TodoProjs) => {
+  const [title, setTitle] = useState<string>("");
+  const [project, setProject] = useState<string>("");
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+
+  useEffect(() => {
+    setTitle(props.title);
+    setProject(props.project);
+  }, [props]);
+
   const handleClickDeleteBtn = () => {
     props.deleteTodo(props.idx);
   };
 
   const handleClickUpdateBtn = () => {
-    // props.updateTodo({ idx: props.idx, title: "updated", project: "updated" });
+    setIsEdit(true);
+  };
+
+  const handleClickSubmitBtn = () => {
+    props.updateTodo({ idx: props.idx, title: title, project: project });
+    setIsEdit(false);
+  };
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleChangeProject = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProject(e.target.value);
   };
 
   return (
     <div className="todo-item">
       <div>
-        <p className="todo-title">{props.title}</p>
+        {isEdit ? (
+          <input value={title} onChange={handleChangeTitle}></input>
+        ) : (
+          <p className="todo-title">{title}</p>
+        )}
       </div>
       <div>
-        <p className="todo-project">{props.project}</p>
+        {isEdit ? (
+          <input value={project} onChange={handleChangeProject}></input>
+        ) : (
+          <p className="todo-project">{project}</p>
+        )}
       </div>
       <div className="btns-container">
-        <button className="btn-delete" onClick={handleClickDeleteBtn}>
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-        <button className="btn-update" onClick={handleClickUpdateBtn}>
-          <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
+        {isEdit ? (
+          <button onClick={handleClickSubmitBtn}>submit</button>
+        ) : (
+          <>
+            <button className="btn-delete" onClick={handleClickDeleteBtn}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+            <button className="btn-update" onClick={handleClickUpdateBtn}>
+              <FontAwesomeIcon icon={faPenToSquare} />
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,15 +1,21 @@
-import { createContext, SetStateAction, useEffect, useState } from "react";
+import { useReducer, useState } from "react";
 import CreateTodo from "./CreateTodo";
 import EditTodo from "./EditTodo";
 import Todo from "./Todo";
-import { ITodo, TodoContext } from "../contexts/TodoContext";
+import { TodoContext, todoReducer, TodoState } from "../contexts/TodoContext";
 
-const TodoList = () => {
-  const [todos, setTodos] = useState<ITodo[]>([
+const initState: TodoState = {
+  todos: [
     { idx: 100, title: "todo-100", project: "project-100" },
     { idx: 101, title: "todo-101", project: "project-101" },
-  ]);
-  const [editIdx, setEditIdx] = useState<number | null>(null);
+  ],
+  newIdx: 1,
+  editIdx: 0,
+};
+
+const TodoList = () => {
+  const [state, dispatch] = useReducer(todoReducer, initState);
+  const { todos, editIdx } = state;
 
   const Items = () => {
     return todos.map((item) => {
@@ -31,7 +37,7 @@ const TodoList = () => {
 
   return (
     <div className="todo-list-container">
-      <TodoContext.Provider value={{ todos, editIdx, setTodos, setEditIdx }}>
+      <TodoContext.Provider value={{ state, dispatch }}>
         {Items()}
         <CreateTodo />
       </TodoContext.Provider>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { TodoContext, ITodo as EditTodoProp } from "../contexts/TodoContext";
 
 const EditTodo = (props: EditTodoProp) => {
-  const { todos, setTodos, setEditIdx } = useContext(TodoContext);
+  const { dispatch } = useContext(TodoContext);
 
   const [title, setTitle] = useState<string>("");
   const [project, setProject] = useState<string>("");
@@ -13,15 +13,8 @@ const EditTodo = (props: EditTodoProp) => {
   }, []);
 
   const handleClickSubmitBtn = () => {
-    const newTodo = todos.map((item) => {
-      if (item.idx === props.idx) {
-        return { idx: props.idx, title, project };
-      } else {
-        return item;
-      }
-    });
-    setTodos(newTodo);
-    setEditIdx(null);
+    const newTodo = { idx: props.idx, title, project };
+    dispatch({ type: "EDIT_TODO", payload: { todo: newTodo } });
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -4,17 +4,14 @@ import { useContext } from "react";
 import { TodoContext, ITodo } from "../contexts/TodoContext";
 
 const Todo = (props: ITodo) => {
-  const { todos, setTodos, setEditIdx } = useContext(TodoContext);
+  const { dispatch } = useContext(TodoContext);
 
   const handleClickDeleteBtn = () => {
-    const newTodo = todos.filter((item) => {
-      return item.idx !== props.idx;
-    });
-    setTodos(newTodo);
+    dispatch({ type: "DELETE_TODO", payload: { idx: props.idx } });
   };
 
   const handleClickUpdateBtn = () => {
-    setEditIdx(props.idx);
+    dispatch({ type: "EDIT_START", payload: { idx: props.idx } });
   };
 
   return (

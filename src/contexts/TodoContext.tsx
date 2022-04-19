@@ -19,7 +19,7 @@ export type TodoState = {
 
 type TodoAction =
   | { type: "EDIT_START"; payload: { idx: number } }
-  | { type: "NEW_TODO"; payload: { todo: ITodo } }
+  | { type: "ADD_TODO"; payload: { todo: ITodo } }
   | { type: "EDIT_TODO"; payload: { todo: ITodo } }
   | { type: "DELETE_TODO"; payload: { idx: number } };
 
@@ -34,7 +34,7 @@ export const todoReducer = (
         ...state,
         editIdx: action.payload.idx,
       };
-    case "NEW_TODO":
+    case "ADD_TODO":
       newTodos = [...state.todos, action.payload.todo];
       return {
         ...state,

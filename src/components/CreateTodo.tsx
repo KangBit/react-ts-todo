@@ -17,7 +17,7 @@ const CreateTodo = () => {
 
   const handleClickCreateBtn = () => {
     let todo = { idx: state.newIdx, title: title, project: project };
-    dispatch({ type: "NEW_TODO", payload: { todo } });
+    dispatch({ type: "ADD_TODO", payload: { todo } });
     setEmpty();
   };
 

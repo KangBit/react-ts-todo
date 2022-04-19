@@ -20,17 +20,9 @@ const TodoList = () => {
   const Items = () => {
     return todos.map((item) => {
       if (item.idx === editIdx) {
-        return (
-          <EditTodo
-            idx={item.idx}
-            title={item.title}
-            project={item.project}
-          ></EditTodo>
-        );
+        return <EditTodo {...item}></EditTodo>;
       } else {
-        return (
-          <Todo idx={item.idx} title={item.title} project={item.project}></Todo>
-        );
+        return <Todo {...item}></Todo>;
       }
     });
   };

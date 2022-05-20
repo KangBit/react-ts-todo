@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
-import { TodoContext } from "../contexts/TodoContext";
+import { useContext, useState } from 'react';
+import { useTodoState, useTodoDispatch } from '../contexts/TodoContext';
 
 const CreateTodo = () => {
-  const { state, dispatch } = useContext(TodoContext);
+  const state = useTodoState();
+  const dispatch = useTodoDispatch();
 
-  const [title, setTitle] = useState("");
-  const [project, setProejct] = useState("");
+  const [title, setTitle] = useState('');
+  const [project, setProejct] = useState('');
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -17,7 +18,7 @@ const CreateTodo = () => {
 
   const handleClickCreateBtn = () => {
     let todo = { idx: state.newIdx, title: title, project: project };
-    dispatch({ type: "ADD_TODO", payload: { todo } });
+    dispatch({ type: 'ADD_TODO', payload: { todo } });
     setEmpty();
   };
 
@@ -26,8 +27,8 @@ const CreateTodo = () => {
   };
 
   const setEmpty = () => {
-    setTitle("");
-    setProejct("");
+    setTitle('');
+    setProejct('');
   };
 
   return (

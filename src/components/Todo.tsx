@@ -1,17 +1,16 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { TodoContext, ITodo } from "../contexts/TodoContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { ITodo, useTodoDispatch } from '../contexts/TodoContext';
 
 const Todo = (props: ITodo) => {
-  const { dispatch } = useContext(TodoContext);
+  const dispatch = useTodoDispatch();
 
   const handleClickDeleteBtn = () => {
-    dispatch({ type: "DELETE_TODO", payload: { idx: props.idx } });
+    dispatch({ type: 'DELETE_TODO', payload: { idx: props.idx } });
   };
 
   const handleClickUpdateBtn = () => {
-    dispatch({ type: "EDIT_START", payload: { idx: props.idx } });
+    dispatch({ type: 'EDIT_START', payload: { idx: props.idx } });
   };
 
   return (

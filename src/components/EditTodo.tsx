@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { TodoContext, ITodo as EditTodoProp } from "../contexts/TodoContext";
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  ITodo as EditTodoProp,
+  useTodoDispatch,
+} from '../contexts/TodoContext';
 
 const EditTodo = (props: EditTodoProp) => {
-  const { dispatch } = useContext(TodoContext);
+  const dispatch = useTodoDispatch();
 
-  const [title, setTitle] = useState<string>("");
-  const [project, setProject] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
+  const [project, setProject] = useState<string>('');
 
   useEffect(() => {
     setTitle(props.title);
@@ -14,7 +17,7 @@ const EditTodo = (props: EditTodoProp) => {
 
   const handleClickSubmitBtn = () => {
     const newTodo = { idx: props.idx, title, project };
-    dispatch({ type: "EDIT_TODO", payload: { todo: newTodo } });
+    dispatch({ type: 'EDIT_TODO', payload: { todo: newTodo } });
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
